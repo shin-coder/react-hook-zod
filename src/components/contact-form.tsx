@@ -32,10 +32,21 @@ export default function ContactForm() {
     setIsSubmitting(true);
 
     try {
-      console.log('送信データ:', data);
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        throw new Error('送信に失敗しました');
+      }
+
       setIsConfirming(false);
       setIsSubmitting(false);
+
       router.push('/contact/thanks');
     } catch (error) {
       console.error('エラー:', error);

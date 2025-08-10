@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import ContactForm from '@/components/contact-form';
 
 export default function Home() {
